@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invalidi</title>
+    <style>
+        body
+        {
+            background: url('img/fon.jpg');
+        }
+        .myButton 
+        {
+            background-color: #007dc1;
+            border-radius: 3px;
+            border: 1px solid #124d77;
+            display: inline-block;
+            cursor: pointer;
+            color: #fff;
+            padding: 6px 25px;
+            text-decoration: none;
+        }
+        .myButton:hover
+        {
+            background-color: #0061a7;
+        }
+        .myButton.active
+        {
+            position: relative;
+            top: 1px;
+        }
+        .wrapper{
+            width: 1280px;
+            height: 720px;
+            margin: 10px auto;
+            display: flex; /* Flexbox для центрирования */
+            flex-direction: column; /* Вертикальное направление */
+            align-items: center; /* Центрирование по горизонтали */
+            justify-content: center; /* Центрирование по вертикали */   
+        }
+
+        .left_right
+        {
+            position: absolute;
+            display: none;
+            cursor: pointer;
+            top: 50%; /* Центрирование по вертикали */
+            transform: translateY(-50%); /* Центрирование по вертикали */
+            
+        }
+        img#images
+        {
+            border: double black 6px;
+            width: 40%;
+            height: auto;
+            
+        }
+        #left, #right
+        {
+            width:40px;
+            height:40px;
+          /*  background: rgba(0,0,0,0.7); */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .left_right img {
+        width: 80%; /* Уменьшите размер изображений внутри кнопок */
+        height: auto; /* Сохраняет пропорции изображения */
+        }
+        #left {
+        left: 30%; /* Положение кнопки влево */
+        top: 40%; /* Центрирование по вертикали */
+        transform: translateY(-50%); /* Центрирование по вертикали */
+        }   
+
+        #right {
+        right: 30%; /* Положение кнопки вправо */
+        top: 40%; /* Центрирование по вертикали */
+        transform: translateY(-50%); /* Центрирование по вертикали */
+        }
+
+    </style>
+</head>
+<body>
+    <div onMouseOver= "btn_show()" onMouseOut= "btn_noshow()" class="wrapper">
+        <script>
+            var imageArray = [
+                "img/1.jpg",
+                "img/2.jpg",
+                "img/3.jpg",
+                "img/4.jpg",
+                "img/5.jpg",
+                "img/6.jpg",
+                "img/7.jpg"
+            ];
+            window.number= 0;
+            var imageCount = imageArray.length;
+
+ 
+       
+        document.write('<img id="images" src="' + imageArray[0] + '">');
+
+      
+        function updateImageNumber() {
+        document.getElementById('num_img').innerHTML = (number + 1) + '/' + imageCount;
+        }
+
+       
+        updateImageNumber(); 
+        document.getElementById('images').src = imageArray[number];
+        btn_show(); 
+
+        function image(num) {
+            if (num == 1 && number < imageCount - 1) {
+                number++;
+            } else if (num == 0 && number > 0) {
+                number--;
+            }
+            document.getElementById('images').src = imageArray[number];
+            updateImageNumber();
+            btn_show(); 
+        }
+
+        function btn_show() {
+            document.getElementById('left').style.display = number > 0 ? 'block' : 'none';
+            document.getElementById('right').style.display = number < imageCount - 1 ? 'block' : 'none'; 
+        }
+
+
+        function btn_noshow() {
+            document.getElementById('left').style.display = 'none';
+            document.getElementById('right').style.display = 'none';
+        }
+
+    
+     </script>
+
+        <div id="left" onclick="image(0)" class="left_right"> 
+            <img src="img/left.png" alt="">
+        </div>
+        <div id="right" onclick="image(1)" class="left_right" style="margin-left:
+            1200px; position: absolute; display: none;"> 
+            <img src="img/right.png" alt="">
+        </div>
+
+    </div>
+    <div style="text-align: center;">
+        <p style="font-size: 18px; color: #333; font-weight: bold;" id="num_img">
+        </p>
+    </div>
+
+    <div style="text-align: center;">
+        <span class="myButton" onclick="image(0)">&lt;</span>
+        <span class="myButton" onclick="image(1)">&gt;</span>
+    </div>
+
+
+<h1 id="heading">ZZZ ГОЙДААААААА ZZZ</h1>
+<script src=" https://code.jquery.com/jquery-2.1.0.js">
+</script>
+<script>
+    /*var leftOffset=0;
+    var movHeading = function ()
+    {
+        $("#heading").offset({left: leftOffset});
+        leftOffset++;
+        if(leftOffset>1450)
+        {
+            leftOffset=0;
+        }
+    };
+    setInterval(movHeading,10);
+
+    var clickHandler = function(event)
+    {
+        console.log("Клик! " + event.pageX + " " + event.pageY);  
+    };
+    $("h1").click(clickHandler);
+    */
+
+    $("html").mousemove(function(event)
+    {
+        $("#heading").offset({
+            left:event.pageX + 20,
+            top:event.pageY +20
+        });
+    });
+    
+</script>
+</body>
+
+</html>
